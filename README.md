@@ -1,2 +1,2 @@
 # flag-o-mania
-My first ever product 
+Flag-o-Mania: a flag guessing game
