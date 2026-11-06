@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- This line makes the page fit phone screens (important for the future app!) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pratham's Game World</title>
+  <link rel="stylesheet" href="Style.css">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+</head>
+
+<body>
+  <h1>WELCOME TO FLAG-O-MANIA</h1>
+  <h2>The only game where "having a red flag" is actually a good thing.</h2>
+
+  <div id="main_wrapper">
+
+    <!-- ============ PAGE 1: HOME ============ -->
+    <section id="home_page" class="page">
+
+      <!-- Top Scorer card: script.js fills this in -->
+      <div id="top_scorer_card" class="card">
+        <div class="card-label">🏆 Top Scorer</div>
+        <div id="top_scorer_body">No scores yet. Be the first Flag Freak!</div>
+      </div>
+
+      <!-- Shown when nobody is logged in -->
+      <div id="no_player_box">
+        <div class="big-text">Who's playing?</div>
+        <input type="text" id="login_name" maxlength="15" placeholder="Your gamer name">
+        <div id="login_error" class="error"></div>
+        <div class="button-row">
+          <button id="login_btn">Log in</button>
+          <button id="go_register_btn">Register new player</button>
+        </div>
+      </div>
+
+      <!-- Shown when someone is logged in -->
+      <div id="player_box">
+        <div class="big-text">Playing as <span id="current_player_label"></span></div>
+        <div id="personal_best"></div>
+        <div class="small-text">Pick your difficulty:</div>
+        <div class="button-row">
+          <button class="difficulty-btn" data-level="easy">😊 Easy</button>
+          <button class="difficulty-btn" data-level="medium">🤔 Medium</button>
+          <button class="difficulty-btn" data-level="hard">🔥 Hard</button>
+        </div>
+        <div class="small-text" id="difficulty_info">Easy: 4 choices · Medium: type it · Hard: no hint, 15s</div>
+        <button id="switch_player_btn" class="secondary">Switch player</button>
+        <div id="storage_mode" class="small-text"></div>
+      </div>
+
+      <div class="button-row">
+        <button id="go_leaderboard_btn">Leader Board</button>
+      </div>
+    </section>
+
+    <!-- ============ PAGE 2: REGISTRATION ============ -->
+    <section id="register_page" class="page">
+      <div class="big-text">Join the Flag Freaks!</div>
+
+      <label for="reg_name">Gamer name</label>
+      <input type="text" id="reg_name" maxlength="15" placeholder="3 to 15 letters or numbers">
+
+      <label>Pick an avatar</label>
+      <div id="avatar_choices"></div>
+
+      <label for="reg_country">Where are you from?</label>
+      <select id="reg_country"></select>
+
+      <div id="reg_error" class="error"></div>
+
+      <div class="button-row">
+        <button id="register_btn">Register</button>
+        <button class="back-btn secondary">Back</button>
+      </div>
+    </section>
+
+    <!-- ============ PAGE 3: THE GAME ============ -->
+    <section id="game_page" class="page">
+      <div class="game-top">
+        <span>Flag <span id="round_count">1</span> of <span id="round_total">10</span></span>
+        <span>Score: <span id="score_count">0</span></span>
+        <span id="timer_box">⏱ <span id="timer_count">15</span>s</span>
+      </div>
+
+      <div id="hint"></div>
+      <div id="flag_image"><img id="flag_img" src="World.jpg" alt="Mystery flag"></div>
+
+      <!-- EASY mode: four answer buttons go in here -->
+      <div id="choices"></div>
+
+      <!-- MEDIUM / HARD mode: type the answer -->
+      <div id="type_box">
+        <input type="text" id="user_guess" placeholder="Type the country">
+        <button id="submit">That's My Guess</button>
+      </div>
+
+      <div id="feedback"></div>
+      <button id="quit_btn" class="secondary">Quit to menu</button>
+    </section>
+
+    <!-- ============ PAGE 4: RESULTS ============ -->
+    <section id="results_page" class="page">
+      <div id="win">GAME OVER</div>
+      <div class="big-text">You scored <span id="final_points">0</span> points</div>
+      <div id="final_detail" class="small-text"></div>
+      <div id="new_best" class="highlight"></div>
+      <div class="button-row">
+        <button id="play_again_btn">Play again</button>
+        <button class="back-btn secondary">Main menu</button>
+      </div>
+    </section>
+
+    <!-- ============ PAGE 5: LEADERBOARD ============ -->
+    <section id="leaderboard_page" class="page">
+      <div class="big-text">These are the real Flag Freaks!</div>
+      <div class="button-row">
+        <button class="board-tab" data-level="all">All</button>
+        <button class="board-tab" data-level="easy">Easy</button>
+        <button class="board-tab" data-level="medium">Medium</button>
+        <button class="board-tab" data-level="hard">Hard</button>
+      </div>
+      <table id="board_table">
+        <thead><tr><th>#</th><th>Player</th><th>Points</th><th>Level</th><th>Date</th></tr></thead>
+        <tbody id="board_body"></tbody>
+      </table>
+      <button class="back-btn secondary">Back</button>
+    </section>
+
+  </div>
+
+  <!-- Order matters! Each file can use what the files ABOVE it created. -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="storage.js"></script>
+  <script src="flags.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

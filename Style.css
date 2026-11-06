@@ -1,0 +1,120 @@
+h1 { color: maroon; font-family: 'Lucida Console', monospace; font-size: 48px; text-align: center; font-weight: bold; margin-bottom: 0; }
+h2 { color: gold; font-family: 'Lucida Console', monospace; font-size: 20px; text-align: center; font-weight: bold; }
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0;
+  padding: 16px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('Flags.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  color: white;
+}
+
+#main_wrapper {
+  text-align: center;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #222;
+  padding: 32px;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 560px;
+  box-sizing: border-box;
+  font-family: monospace;
+}
+
+/* Every "page" is hidden by default. script.js adds the class "active"
+   to the ONE page that should be visible. */
+.page { display: none; }
+.page.active { display: block; }
+
+.button-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 16px 0;
+}
+
+.big-text   { color: maroon; font-size: 24px; font-weight: bold; margin: 12px 0; }
+.small-text { color: #555; font-size: 15px; margin: 8px 0; }
+.highlight  { color: #b8860b; font-size: 22px; font-weight: bold; margin: 12px 0; }
+.error      { color: #c0392b; font-weight: bold; min-height: 20px; margin-top: 8px; }
+
+/* ---------- Top Scorer card ---------- */
+.card {
+  background: linear-gradient(135deg, #4b0082, #800080);
+  color: white;
+  border-radius: 16px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.card-label { color: gold; font-size: 18px; font-weight: bold; letter-spacing: 2px; }
+#top_scorer_body { font-size: 18px; margin-top: 8px; }
+.top-name { font-size: 26px; font-weight: bold; }
+
+/* ---------- Forms ---------- */
+label { display: block; color: maroon; font-weight: bold; margin: 16px 0 6px; }
+input[type="text"], select {
+  font-family: monospace;
+  font-size: 20px;
+  padding: 8px 12px;
+  border: 2px solid #800080;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 320px;
+  box-sizing: border-box;
+}
+#avatar_choices { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
+.avatar-btn { font-size: 26px; padding: 6px 10px; background: #eee; }
+.avatar-btn.selected { background: gold; outline: 3px solid #800080; }
+
+/* ---------- Game ---------- */
+.game-top { display: flex; justify-content: space-between; color: maroon; font-weight: bold; font-size: 18px; }
+#hint { color: #555; font-size: 18px; margin: 12px 0; min-height: 22px; }
+#flag_image img { width: 100%; max-width: 320px; border: 5px solid #333; border-radius: 10px; }
+#choices { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; }
+#choices button { width: 100%; }
+#type_box { margin: 16px 0; display: flex; flex-direction: column; align-items: center; gap: 10px; }
+#feedback { font-size: 20px; font-weight: bold; min-height: 28px; margin: 10px 0; }
+.right { color: green; }
+.wrong { color: #c0392b; }
+#win { color: gold; font-size: 36px; font-weight: bold; text-shadow: 1px 1px 2px #333; }
+
+/* ---------- Leaderboard ---------- */
+#board_table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 15px; }
+#board_table th { background: #800080; color: white; padding: 8px; }
+#board_table td { padding: 8px; border-bottom: 1px solid #ddd; }
+.board-tab.selected { background: gold; color: #333; }
+
+/* ---------- Buttons ---------- */
+button {
+  background-color: purple;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-family: 'Lucida Console', monospace;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+button:hover  { background-color: #5e005e; transform: scale(1.05); }
+button:active { transform: scale(0.95); }
+button:disabled { opacity: 0.5; cursor: default; transform: none; }
+button.secondary { background-color: #777; }
+button.secondary:hover { background-color: #555; }
+
+/* Phones: make the big title smaller so it fits */
+@media (max-width: 600px) {
+  h1 { font-size: 30px; }
+  #main_wrapper { padding: 20px; }
+  #choices { grid-template-columns: 1fr; }
+}

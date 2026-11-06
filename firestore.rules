@@ -1,0 +1,26 @@
+// Paste this into Firebase console > Firestore Database > Rules, then Publish.
+// Rules run on Google's servers, so a player can't get around them by
+// editing the JavaScript in their browser.
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    match /players/{playerId} {
+      allow read: if true;
+      // Only brand-new players (no overwriting someone else), with a valid name
+      allow create: if request.resource.data.name is string
+                    && request.resource.data.name.matches('^[A-Za-z0-9_]{3,15}$')
+                    && playerId == request.resource.data.name.lower();
+    }
+
+    match /scores/{scoreId} {
+      allow read: if true;
+      // Scores can be added but never changed or deleted.
+      // Max points = 10 flags x 3 points on Hard = 30.
+      allow create: if request.resource.data.points is int
+                    && request.resource.data.points >= 0
+                    && request.resource.data.points <= 30
+                    && request.resource.data.difficulty in ['easy', 'medium', 'hard'];
+    }
+  }
+}
